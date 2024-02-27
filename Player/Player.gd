@@ -8,6 +8,7 @@ extends CharacterBody3D
 @export_range(0, 30, 0.2) var double_jump_power: float = 10
 @export_range(-10, 60, 0.2) var character_speed: float = 5.0
 @export_range(-10, 60, 0.2) var character_jump: float = 4.6
+@export_range(1, 60, 1) var wall_jumps: int = 1
 @export_range(2, 100, 0.2) var wall_jump_speed: float = 10.4
 @export_range(2, 60, 0.5) var multiply_run: float = 3.0
 @export_range(1, 15000, 5) var staminabase: float = 20
@@ -18,6 +19,7 @@ extends CharacterBody3D
 
 var stamina=staminabase
 var current_double_jumps=double_jumps
+var current_wall_jumps=wall_jumps
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera3D
 
@@ -51,6 +53,7 @@ func _physics_process(delta):
 	
 	if is_on_floor():
 		current_double_jumps = double_jumps
+		current_wall_jumps = wall_jumps
 		
 
 	# Handle jump.
@@ -74,13 +77,14 @@ func _physics_process(delta):
 	var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()		
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = character_jump
+		velocity.y += character_jump
 		
-	if Input.is_action_just_pressed("jump") and is_on_wall():
+	if Input.is_action_just_pressed("jump") and is_on_wall() and current_wall_jumps > 0:
+		current_wall_jumps-=1
 		velocity.y = character_jump/1.2
 		velocity.x = character_jump*wall_jump_speed
 		
-	if Input.is_action_just_pressed("jump") and current_double_jumps > 0 and not is_on_floor():
+	if Input.is_action_just_pressed("jump") and current_double_jumps > 0 and not is_on_floor() and not is_on_wall():
 		current_double_jumps-=1
 		velocity.y += double_jump_power
 

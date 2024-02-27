@@ -16,7 +16,6 @@ background_mode = 2
 sky = SubResource("Sky_tftdh")
 tonemap_mode = 2
 glow_enabled = true
-fog_enabled = true
 fog_sun_scatter = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7ctji"]
@@ -109,14 +108,14 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Big Building/InsideBuilding/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_e20dm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node"]
+[node name="Wall" type="MeshInstance3D" parent="Node"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74.7882, 9.84174, 22.8037)
 mesh = SubResource("BoxMesh_b1jaj")
 script = ExtResource("2_fmph0")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Node/MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Node/Wall"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Wall/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_omf76")
 
 [node name="Player" type="CharacterBody3D" parent="."]
