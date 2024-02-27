@@ -1,7 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://c5twcj0rfb0ky"]
+[gd_scene load_steps=19 format=3 uid="uid://c5twcj0rfb0ky"]
 
 [ext_resource type="Texture2D" uid="uid://dux2wcvrmalps" path="res://textures/prototype/dark/texture_08.png" id="1_qs5h5"]
-[ext_resource type="Script" path="res://Enviroment/Wall.gd" id="2_fmph0"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="2_kcewh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6gx3k"]
@@ -41,17 +40,15 @@ size = Vector3(16, 10, 15)
 data = PackedVector3Array(0, 5, 7.5, 8, -5, 7.5, -8, -5, 7.5, 0, 5, -7.5, -8, -5, -7.5, 8, -5, -7.5, 0, 5, 7.5, 0, 5, -7.5, 8, -5, 7.5, 0, 5, -7.5, 8, -5, -7.5, 8, -5, 7.5, 0, 5, -7.5, 0, 5, 7.5, -8, -5, -7.5, 0, 5, 7.5, -8, -5, 7.5, -8, -5, -7.5, -8, -5, 7.5, 8, -5, 7.5, -8, -5, -7.5, 8, -5, 7.5, 8, -5, -7.5, -8, -5, -7.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_cly0h"]
-flip_faces = true
 size = Vector3(100, 20, 20)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e20dm"]
-data = PackedVector3Array(50, 10, 10, -50, 10, 10, -50, -10, 10, 50, -10, 10, 50, 10, 10, -50, -10, 10, -50, 10, -10, 50, 10, -10, 50, -10, -10, -50, -10, -10, -50, 10, -10, 50, -10, -10, 50, 10, -10, 50, 10, 10, 50, -10, 10, 50, -10, -10, 50, 10, -10, 50, -10, 10, -50, 10, 10, -50, 10, -10, -50, -10, -10, -50, -10, 10, -50, 10, 10, -50, -10, -10, -50, 10, 10, 50, 10, 10, 50, 10, -10, -50, 10, -10, -50, 10, 10, 50, 10, -10, 50, -10, 10, -50, -10, 10, -50, -10, -10, 50, -10, -10, 50, -10, 10, -50, -10, -10)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e373y"]
+data = PackedVector3Array(-50, 10, 10, 50, 10, 10, -50, -10, 10, 50, 10, 10, 50, -10, 10, -50, -10, 10, 50, 10, -10, -50, 10, -10, 50, -10, -10, -50, 10, -10, -50, -10, -10, 50, -10, -10, 50, 10, 10, 50, 10, -10, 50, -10, 10, 50, 10, -10, 50, -10, -10, 50, -10, 10, -50, 10, -10, -50, 10, 10, -50, -10, -10, -50, 10, 10, -50, -10, 10, -50, -10, -10, 50, 10, 10, -50, 10, 10, 50, 10, -10, -50, 10, 10, -50, 10, -10, 50, 10, -10, -50, -10, 10, 50, -10, 10, -50, -10, -10, 50, -10, 10, 50, -10, -10, -50, -10, -10)
 
-[sub_resource type="BoxMesh" id="BoxMesh_b1jaj"]
-size = Vector3(1, 20, 59)
+[sub_resource type="BoxMesh" id="BoxMesh_0scx0"]
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_omf76"]
-data = PackedVector3Array(-0.5, 10, 29.5, 0.5, 10, 29.5, -0.5, -10, 29.5, 0.5, 10, 29.5, 0.5, -10, 29.5, -0.5, -10, 29.5, 0.5, 10, -29.5, -0.5, 10, -29.5, 0.5, -10, -29.5, -0.5, 10, -29.5, -0.5, -10, -29.5, 0.5, -10, -29.5, 0.5, 10, 29.5, 0.5, 10, -29.5, 0.5, -10, 29.5, 0.5, 10, -29.5, 0.5, -10, -29.5, 0.5, -10, 29.5, -0.5, 10, -29.5, -0.5, 10, 29.5, -0.5, -10, -29.5, -0.5, 10, 29.5, -0.5, -10, 29.5, -0.5, -10, -29.5, 0.5, 10, 29.5, -0.5, 10, 29.5, 0.5, 10, -29.5, -0.5, 10, 29.5, -0.5, 10, -29.5, 0.5, 10, -29.5, -0.5, -10, 29.5, 0.5, -10, 29.5, -0.5, -10, -29.5, 0.5, -10, 29.5, 0.5, -10, -29.5, -0.5, -10, -29.5)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_t4yyq"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_favby"]
 
@@ -106,26 +103,29 @@ skeleton = NodePath("../..")
 [node name="StaticBody3D" type="StaticBody3D" parent="Node/Big Building/InsideBuilding"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Big Building/InsideBuilding/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_e20dm")
+shape = SubResource("ConcavePolygonShape3D_e373y")
 
-[node name="Wall" type="MeshInstance3D" parent="Node"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74.7882, 9.84174, 22.8037)
-mesh = SubResource("BoxMesh_b1jaj")
-script = ExtResource("2_fmph0")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node"]
+transform = Transform3D(0.308251, 2.07985, 0, -25.3381, 0.0253024, 0, 0, 0, 25.79, -47.0272, 13.9475, -0.111686)
+mesh = SubResource("BoxMesh_0scx0")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Node/Wall"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Node/MeshInstance3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Wall/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_omf76")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_t4yyq")
 
 [node name="Player" type="CharacterBody3D" parent="."]
 floor_constant_speed = true
 script = ExtResource("2_kcewh")
 invert_y = true
 double_jump_power = 11.2
+character_speed = 495.4
 character_jump = 11.2
+wall_jumps = 4
 wall_jump_speed = 5.6
+multiply_run = 2.0
 staminabase = 15000.0
+slide_size = 1.4
 gravity = 18.8
 metadata/_edit_lock_ = true
 
@@ -146,3 +146,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79453, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0211218, -0.150877, -0.545036)
 target_position = Vector3(0, 0, -2)
 collide_with_bodies = false
+
+[node name="PlayerSize" type="Node3D" parent="."]

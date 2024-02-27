@@ -6,12 +6,17 @@ extends CharacterBody3D
 @export var invert_x : bool
 @export var double_jumps:int=1
 @export_range(0, 30, 0.2) var double_jump_power: float = 10
-@export_range(-10, 60, 0.2) var character_speed: float = 5.0
+@export_range(-10, 1500, 0.2) var character_speed: float = 5.0
 @export_range(-10, 60, 0.2) var character_jump: float = 4.6
 @export_range(1, 60, 1) var wall_jumps: int = 1
 @export_range(2, 100, 0.2) var wall_jump_speed: float = 10.4
+@export_range(1, 100, 1) var air_dash: int = 1
+@export_range(1, 100, 0.2) var dash_speed: float = 5.0
 @export_range(2, 60, 0.5) var multiply_run: float = 3.0
 @export_range(1, 15000, 5) var staminabase: float = 20
+@export_range(1, 100, 0.2) var slide_resistance: float = 5.0
+@export_range(1, 100, 0.2) var default_size: float = 1.0
+@export_range(0, 100, 0.2) var slide_size: float = 0.5
 @export_range(1, 100, 0.2) var gravity: float = 9.8
 
 
@@ -20,11 +25,15 @@ extends CharacterBody3D
 var stamina=staminabase
 var current_double_jumps=double_jumps
 var current_wall_jumps=wall_jumps
+var current_air_dash=air_dash
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera3D
+@onready var psize := $".."
+@onready var player := $"."
 
 var is_running:bool = false
-
+var sliding:bool = false
+var default_gravity = 0
 func _unhandled_input(event) -> void:
 	if event is InputEventMouseButton:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -45,6 +54,8 @@ func _unhandled_input(event) -> void:
 		
 func _ready():
 	stamina+=staminabase-stamina
+	default_gravity=gravity
+	
 		
 func _physics_process(delta):
 	# Add the gravity.
@@ -54,8 +65,14 @@ func _physics_process(delta):
 	if is_on_floor():
 		current_double_jumps = double_jumps
 		current_wall_jumps = wall_jumps
+	
+	if is_on_wall():
+		player.gravity=0
+	else:
+		player.gravity=default_gravity
+		pass
 		
-
+		
 	# Handle jump.
 	if Input.is_action_pressed('run') and not is_running and not stamina <= 0:
 		is_running=true
@@ -87,13 +104,22 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and current_double_jumps > 0 and not is_on_floor() and not is_on_wall():
 		current_double_jumps-=1
 		velocity.y += double_jump_power
+	if Input.is_action_just_pressed("dash") and air_dash > 0:
+		velocity.x = direction.x * dash_speed * delta
+		velocity.z = direction.z * dash_speed * delta
+	
+	if Input.is_action_pressed("slide") and not sliding:
+		sliding=true
+		player.scale.y = player.scale.y/slide_size
+		move_and_slide()
 
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	if not Input.is_action_pressed('slide') and sliding:
+		sliding=false
+		player.scale.y = player.scale.y*slide_size
+	
 	if direction:
-		velocity.x = direction.x * character_speed
-		velocity.z = direction.z * character_speed
+		velocity.x = direction.x * character_speed * delta
+		velocity.z = direction.z * character_speed * delta
 	else:
 		velocity.x = move_toward(velocity.x, 0, character_speed)
 		velocity.z = move_toward(velocity.z, 0, character_speed)
