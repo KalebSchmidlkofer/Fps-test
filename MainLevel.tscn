@@ -105,16 +105,16 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Big Building/InsideBuilding/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_e373y")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node"]
-transform = Transform3D(0.308251, 2.07985, 0, -25.3381, 0.0253024, 0, 0, 0, 25.79, -47.0272, 13.9475, -0.111686)
+[node name="Wall" type="MeshInstance3D" parent="Node"]
+transform = Transform3D(0.308251, 2.07985, 0, -25.3381, 0.0253024, 0, 0, 0, 25.79, -47.0272, 14.1682, -0.111686)
 mesh = SubResource("BoxMesh_0scx0")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Node/MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Node/Wall"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Wall/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_t4yyq")
 
-[node name="Player" type="CharacterBody3D" parent="."]
+[node name="Player" type="CharacterBody3D" parent="Node"]
 floor_constant_speed = true
 script = ExtResource("2_kcewh")
 invert_y = true
@@ -129,22 +129,30 @@ slide_size = 1.4
 gravity = 18.8
 metadata/_edit_lock_ = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16221, 0)
 mesh = SubResource("CapsuleMesh_favby")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16221, 0)
 shape = SubResource("ConvexPolygonShape3D_cbwyd")
 
-[node name="Neck" type="Node3D" parent="Player"]
+[node name="Neck" type="Node3D" parent="Node/Player"]
 
-[node name="Camera3D" type="Camera3D" parent="Player/Neck"]
+[node name="Camera3D" type="Camera3D" parent="Node/Player/Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79453, 0)
 
-[node name="ghookcast" type="RayCast3D" parent="Player/Neck/Camera3D"]
+[node name="ghookcast" type="RayCast3D" parent="Node/Player/Neck/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0211218, -0.150877, -0.545036)
 target_position = Vector3(0, 0, -2)
 collide_with_bodies = false
 
-[node name="PlayerSize" type="Node3D" parent="."]
+[node name="avoidanceCeiling" type="RayCast3D" parent="Node/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.169122, 0.0231233)
+target_position = Vector3(0, 2, 0)
+
+[node name="3rdPersonNeck" type="Node3D" parent="Node/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61146, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Node/Player/3rdPersonNeck"]
+transform = Transform3D(1, 0, 0, 0, 0.957682, 0.287829, 0, -0.287829, 0.957682, 0, 2.24014, 5.42748)

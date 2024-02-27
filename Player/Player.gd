@@ -28,6 +28,9 @@ var current_wall_jumps=wall_jumps
 var current_air_dash=air_dash
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera3D
+@onready var thirdneck := $"3rdPersonNeck"
+@onready var thirdcamera := $"3rdPersonNeck/Camera3D"
+@onready var uncrouchray := $avoidanceCeiling
 @onready var psize := $".."
 @onready var player := $"."
 
@@ -103,6 +106,7 @@ func _physics_process(delta):
 		
 	if Input.is_action_just_pressed("jump") and current_double_jumps > 0 and not is_on_floor() and not is_on_wall():
 		current_double_jumps-=1
+		velocity.y = 0
 		velocity.y += double_jump_power
 	if Input.is_action_just_pressed("dash") and air_dash > 0:
 		velocity.x = direction.x * dash_speed * delta
@@ -111,11 +115,13 @@ func _physics_process(delta):
 	if Input.is_action_pressed("slide") and not sliding:
 		sliding=true
 		player.scale.y = player.scale.y/slide_size
+		uncrouchray.scale.y=uncrouchray.scale.y*slide_size
 		move_and_slide()
 
-	if not Input.is_action_pressed('slide') and sliding:
+	if not Input.is_action_pressed('slide') and sliding and not uncrouchray.is_colliding():
 		sliding=false
 		player.scale.y = player.scale.y*slide_size
+		uncrouchray.scale.y=uncrouchray.scale.y/slide_size
 	
 	if direction:
 		velocity.x = direction.x * character_speed * delta
