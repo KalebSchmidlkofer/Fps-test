@@ -1,26 +1,40 @@
 extends CharacterBody3D
 
+## Mouse sensitivity
 @export var sensitivity = 0.01
-
+## Invert camera on the y-axis
 @export var invert_y : bool
+## Invert camera on the x-axis
 @export var invert_x : bool
+## How many double jumps the player has
 @export var double_jumps:int=1
+## How strong the double jump is
 @export_range(0, 30, 0.2) var double_jump_power: float = 10
+## Default Speed for the player
 @export_range(-10, 1500, 0.2) var character_speed: float = 5.0
+## How high default jump is for the player
 @export_range(-10, 60, 0.2) var character_jump: float = 4.6
+## How Many walljumps you have
 @export_range(1, 60, 1) var wall_jumps: int = 1
+## How far on the x-axis you jump off of walls
 @export_range(2, 100, 0.2) var wall_jump_speed: float = 10.4
+## How Many Dashes you have
 @export_range(1, 100, 1) var air_dash: int = 1
+## How fast you dash
 @export_range(1, 100, 0.2) var dash_speed: float = 5.0
+## What to multiply by when holding shift
 @export_range(2, 60, 0.5) var multiply_run: float = 3.0
+## How much stamina you have
 @export_range(1, 15000, 5) var staminabase: float = 20
+## Default slide resistance
 @export_range(1, 100, 0.2) var slide_resistance: float = 5.0
+## Default Size of The Player
 @export_range(1, 100, 0.2) var default_size: float = 1.0
+## What size to divide by when crouch is held
 @export_range(0, 100, 0.2) var slide_size: float = 0.5
+## Default Gravity
 @export_range(1, 100, 0.2) var gravity: float = 9.8
 
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 
 var stamina=staminabase
 var current_double_jumps=double_jumps
@@ -31,8 +45,8 @@ var current_air_dash=air_dash
 @onready var thirdneck := $"3rdPersonNeck"
 @onready var thirdcamera := $"3rdPersonNeck/Camera3D"
 @onready var uncrouchray := $avoidanceCeiling
-@onready var psize := $".."
 @onready var player := $"."
+@onready var grappleray := $Neck/Camera3D/ghookray
 
 var is_running:bool = false
 var sliding:bool = false
@@ -53,7 +67,7 @@ func _unhandled_input(event) -> void:
 			else:
 				camera.rotate_x(-event.relative.y * sensitivity)
 				
-			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-50), deg_to_rad(60))
+			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 		
 func _ready():
 	stamina+=staminabase-stamina
@@ -122,6 +136,11 @@ func _physics_process(delta):
 		sliding=false
 		player.scale.y = player.scale.y*slide_size
 		uncrouchray.scale.y=uncrouchray.scale.y/slide_size
+	
+	if Input.is_action_just_pressed("grapple"):
+		if grappleray.is_colliding():
+			var collision_point = grappleray.get_collision_point()
+			global_transform.origin = collision_point
 	
 	if direction:
 		velocity.x = direction.x * character_speed * delta
