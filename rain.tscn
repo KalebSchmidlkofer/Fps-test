@@ -31,7 +31,8 @@ sky_material = SubResource("ProceduralSkyMaterial_hlyl5")
 background_mode = 2
 sky = SubResource("Sky_nq2hv")
 glow_enabled = true
-volumetric_fog_density = 0.07
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1
 
 [sub_resource type="QuadMesh" id="QuadMesh_u30nn"]
 
@@ -47,6 +48,7 @@ noise = SubResource("FastNoiseLite_aa23m")
 frequency = 0.0087
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r425r"]
+as_normal_map = true
 noise = SubResource("FastNoiseLite_5tyc6")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ig6u4"]
@@ -58,8 +60,8 @@ shader_parameter/normalmap = SubResource("NoiseTexture2D_r425r")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_r0ox6"]
 material = SubResource("ShaderMaterial_ig6u4")
-subdivide_width = 200
-subdivide_depth = 200
+subdivide_width = 32
+subdivide_depth = 32
 
 [sub_resource type="GDScript" id="GDScript_86w11"]
 script/source = "extends MeshInstance3D
@@ -79,7 +81,7 @@ func _process(delta):
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_insno"]
 lifetime_randomness = 1.0
 emission_shape = 3
-emission_box_extents = Vector3(5, 0.5, 5)
+emission_box_extents = Vector3(10, 0.5, 10)
 direction = Vector3(0, -1, 0)
 spread = 8.0
 initial_velocity_min = 10.0
@@ -144,14 +146,12 @@ mesh = SubResource("PlaneMesh_r0ox6")
 script = SubResource("GDScript_86w11")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Everything/Water"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16, 0.86, 0.18)
-light_indirect_energy = 16.0
-light_volumetric_fog_energy = 16.0
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.16, 0.86, -0.04)
 omni_range = 67.74
-omni_attenuation = 0.15932
 
 [node name="Player" parent="." instance=ExtResource("2_6vb0b")]
-multiply_run = 16.5
+character_speed = 797.4
+multiply_run = 12.0
 flight_speed = 1500.0
 multiply_flight_speed = 16.2
 flight_xy_speed = 15.0
@@ -160,7 +160,7 @@ character_jump = 14.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Player"]
 transform = Transform3D(5.375, 0, 0, 0, 5.375, 0, 0, 0, 5.375, 0, 26, 0)
-amount = 20000
+amount = 30000
 lifetime = 2.0
 randomness = 0.3
 visibility_aabb = AABB(-10, -20, -10, 20, 20, 20)
