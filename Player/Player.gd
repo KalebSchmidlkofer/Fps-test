@@ -67,7 +67,7 @@ extends CharacterBody3D
 
 @export_category('Gravity')
 ## Default Gravity
-@export_range(1, 100, 0.2) var gravity: float = 9.8
+@export_range(1, 100, 0.2) var gravity: float = 18
 
 
 

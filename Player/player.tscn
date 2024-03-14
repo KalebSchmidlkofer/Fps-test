@@ -45,4 +45,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61146, 0)
 [node name="3rdPersonCamera" type="Camera3D" parent="3rdPersonNeck"]
 transform = Transform3D(1, 0, 0, 0, 0.957682, 0.287829, 0, -0.287829, 0.957682, 0, 2.24014, 5.42748)
 
+[node name="LeftWall" type="RayCast3D" parent="3rdPersonNeck"]
+target_position = Vector3(-1, 0, 0)
+
+[node name="RightWall" type="RayCast3D" parent="3rdPersonNeck"]
+target_position = Vector3(1, 0, 0)
+
 [node name="Wall_run_timer" type="Timer" parent="."]

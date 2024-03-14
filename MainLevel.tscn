@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5twcj0rfb0ky"]
+[gd_scene load_steps=11 format=3 uid="uid://c5twcj0rfb0ky"]
 
 [ext_resource type="Material" uid="uid://h0omavrnsek5" path="res://materials/floor.tres" id="1_iq7kj"]
+[ext_resource type="Material" uid="uid://dqy7k5m5efmw2" path="res://materials/obstacle.tres" id="2_4ects"]
 [ext_resource type="PackedScene" uid="uid://dehxs6jtu4lbw" path="res://Player/player.tscn" id="2_ts3o4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6gx3k"]
@@ -51,7 +52,8 @@ shape = SubResource("ConcavePolygonShape3D_jgcnp")
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Shapes/StartingBox"]
 
 [node name="Wall1" type="MeshInstance3D" parent="Shapes"]
-transform = Transform3D(0.135, 0, 0, 0, 6, 0, 0, 0, 8.74, -2, 2, -6)
+transform = Transform3D(0.135, 0, 0, 0, 10.2, 0, 0, 0, 21.85, -2, 7, -36)
+material_override = ExtResource("2_4ects")
 mesh = SubResource("BoxMesh_m3m20")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Shapes/Wall1"]
@@ -59,7 +61,16 @@ mesh = SubResource("BoxMesh_m3m20")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Shapes/Wall1/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_bdrd5")
 
+[node name="Wall2" type="MeshInstance3D" parent="Shapes"]
+transform = Transform3D(0.135, 0, 0, 0, 10.2, 0, 0, 0, 21.85, 8, 7, -49)
+material_override = ExtResource("2_4ects")
+mesh = SubResource("BoxMesh_m3m20")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Shapes/Wall2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shapes/Wall2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_bdrd5")
+
 [node name="Player" parent="." instance=ExtResource("2_ts3o4")]
-multiply_run = 6.0
+character_speed = 1500.0
 flight_speed = 1500.0
-multiply_flight_speed = 5.6
