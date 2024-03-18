@@ -11,7 +11,6 @@ points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607,
 floor_constant_speed = true
 script = ExtResource("1_v1r05")
 invert_y = true
-character_speed = 495.4
 multiply_run = 2.0
 staminabase = 15000.0
 double_jump_power = 11.2
@@ -32,23 +31,22 @@ shape = SubResource("ConvexPolygonShape3D_cbwyd")
 
 [node name="Neck" type="Node3D" parent="."]
 
-[node name="Camera3D" type="Camera3D" parent="Neck"]
+[node name="1stPersonCamera" type="Camera3D" parent="Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79453, 0)
+
+[node name="3rdPersonCamera" type="Camera3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, 0.957682, 0.287829, 0, -0.287829, 0.957682, 0, 3.8516, 5.42748)
+
+[node name="LeftWall" type="RayCast3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61146, 0)
+target_position = Vector3(-1, 0, 0)
+
+[node name="RightWall" type="RayCast3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61146, 0)
+target_position = Vector3(1, 0, 0)
 
 [node name="avoidanceCeiling" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.169122, -0.00646174)
 target_position = Vector3(0, 1.99, 0)
-
-[node name="3rdPersonNeck" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61146, 0)
-
-[node name="3rdPersonCamera" type="Camera3D" parent="3rdPersonNeck"]
-transform = Transform3D(1, 0, 0, 0, 0.957682, 0.287829, 0, -0.287829, 0.957682, 0, 2.24014, 5.42748)
-
-[node name="LeftWall" type="RayCast3D" parent="3rdPersonNeck"]
-target_position = Vector3(-1, 0, 0)
-
-[node name="RightWall" type="RayCast3D" parent="3rdPersonNeck"]
-target_position = Vector3(1, 0, 0)
 
 [node name="Wall_run_timer" type="Timer" parent="."]

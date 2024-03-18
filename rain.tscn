@@ -150,7 +150,6 @@ transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.16, 0.86, -0.04)
 omni_range = 67.74
 
 [node name="Player" parent="." instance=ExtResource("2_6vb0b")]
-character_speed = 797.4
 multiply_run = 12.0
 flight_speed = 1500.0
 multiply_flight_speed = 16.2

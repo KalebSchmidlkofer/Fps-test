@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+
 @onready var WallRunTimer = $Wall_run_timer
 @export_category('Camera')
 ## Mouse sensitivity
@@ -11,15 +12,19 @@ extends CharacterBody3D
 
 @export_category('Run/Walk')
 ## Default Speed for the player
-@export_range(-10, 1500, 0.2) var character_speed: float = 5.0
+@export var character_speed: int = 1
 ## What to multiply by when holding shift
-@export_range(2, 60, 0.5) var multiply_run: float = 3.0
+@export_range(0, 60, 0.2) var multiply_run: float = 1.2
 ## How much stamina you have
 @export_range(1, 15000, 5) var staminabase: float = 20
 
+@export_category('JumpPad')
+@export_range(0, 60, 0.2) var multiplyJump: float = 7.6
+
+
 @export_category('Fly')
 ## Flight Speed
-@export_range(1, 1500, .2) var flight_speed: float = 10
+@export_range(1, 10, .2) var flight_speed: float = 1
 ## How much to multiply flight speed when holding shift
 @export_range(1, 60, .2) var multiply_flight_speed: float = 2
 ## How fast you move up and down
@@ -75,9 +80,8 @@ var stamina=staminabase
 var current_double_jumps=double_jumps
 var current_air_dash=air_dash
 @onready var neck := $Neck
-@onready var camera := $Neck/Camera3D
-@onready var thirdneck := $"3rdPersonNeck"
-@onready var thirdcamera := $"3rdPersonNeck/3rdPersonCamera"
+@onready var firstcamera := $"Neck/1stPersonCamera"
+@onready var thirdcamera := $"Neck/3rdPersonCamera"
 @onready var uncrouchray := $avoidanceCeiling
 @onready var player := $"."
 
@@ -85,10 +89,12 @@ var is_speed_flying:bool=false
 var flightcheck:bool=false
 var is_flying:bool = false
 var is_running:bool = false
-var wall_running:bool = false
+var is_wall_running:bool = false
 var is_sliding:bool = false
 var slide_velocity: Vector3 = Vector3.ZERO
 var default_gravity = 0
+
+
 func _unhandled_input(event) -> void:
 	if event is InputEventMouseButton:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -101,12 +107,13 @@ func _unhandled_input(event) -> void:
 			else:
 				neck.rotate_y(-event.relative.x * sensitivity)
 			if invert_y:
-				camera.rotate_x(event.relative.y * sensitivity)
+				firstcamera.rotate_x(event.relative.y * sensitivity)
 			else:
-				camera.rotate_x(-event.relative.y * sensitivity)
+				firstcamera.rotate_x(-event.relative.y * sensitivity)
 				
-			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
-		
+			firstcamera.rotation.x = clamp(firstcamera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
+
+
 func _ready():
 	stamina+=staminabase-stamina
 	default_gravity=gravity
@@ -115,12 +122,10 @@ func _ready():
 func wall_run(delta):
 	if Input.is_action_pressed('forward') and is_on_wall():
 		player.gravity=0
-		var wall_running=true
-	
+		var is_wall_running=true
 	else:
-		var wall_running=true
+		var is_wall_running=false
 		pass
-
 
 
 func _physics_process(delta):
@@ -146,6 +151,13 @@ func _physics_process(delta):
 		flightcheck=false
 		normal_mode(delta)
 		
+	if Input.is_action_just_pressed("Switch_cameras"):
+		print('Switching')
+		if firstcamera.current:
+			thirdcamera.make_current()
+		else:
+			firstcamera.make_current()
+		
 
 func fly_mode(delta):
 	if not flightcheck:
@@ -157,12 +169,11 @@ func fly_mode(delta):
 	var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if not Input.is_action_pressed("jump") and not Input.is_action_pressed("slide"):
-		velocity.y = 0	
+		velocity.y = 0
 
 	if Input.is_action_pressed("jump"):
 		velocity.y = flight_xy_speed
-	if Input.is_action_pressed("slide"):
-		velocity.y = flight_xy_speed * -1
+
 	if Input.is_action_pressed("run") and not is_speed_flying:
 		is_speed_flying=true
 		flight_speed=flight_speed*multiply_flight_speed
@@ -175,15 +186,18 @@ func fly_mode(delta):
 	
 	
 	if direction:
-		velocity.x = direction.x * flight_speed * delta
-		velocity.z = direction.z * flight_speed * delta
+		velocity.x = direction.x * flight_speed * 3000 * delta
+		velocity.z = direction.z * flight_speed * 3000 * delta
 	else:
-		velocity.x = move_toward(velocity.x, 0, flight_speed)
-		velocity.z = move_toward(velocity.z, 0, flight_speed)
+		velocity.x = move_toward(velocity.x, 0, flight_speed * 3000)
+		velocity.z = move_toward(velocity.z, 0, flight_speed * 3000)
 
 	move_and_slide()
 		
 func normal_mode(delta):
+	var on_floor = is_on_floor()
+	var on_wall =  is_on_wall()
+	var on_ceiling =  is_on_ceiling()
 	if Input.is_action_pressed('run') and not is_running and not stamina <= 0:
 		is_running=true
 		character_speed = character_speed*multiply_run
@@ -203,10 +217,10 @@ func normal_mode(delta):
 	var input_dir = Input.get_vector("left", "right", "forward", "back")
 	var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()		
 
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and on_floor:
 		velocity.y += character_jump
 		
-	if Input.is_action_just_pressed("jump") and current_double_jumps > 0 and not is_on_floor() and wall_running==false:
+	if Input.is_action_just_pressed("jump") and current_double_jumps > 0 and not on_floor and is_wall_running==false:
 		current_double_jumps-=1
 		velocity.y = 0
 		velocity.y += double_jump_power
@@ -227,31 +241,40 @@ func normal_mode(delta):
 			move_and_slide()
 	
 	# Check if the slide action is triggered (e.g., by pressing a specific key)
-	if Input.is_action_just_pressed("slide"):
-		# Start the slide if not already sliding
-		if !is_sliding:
-			start_slide()
+	if is_on_floor() and Input.is_action_pressed("slide"):
+		start_slide(delta, direction)
+	if Input.is_action_just_released('slide'):
+		if is_sliding:
+			end_slide()
 
 		
 	if direction:
-		velocity.x = direction.x * character_speed * delta
-		velocity.z = direction.z * character_speed * delta
+		velocity.x = direction.x * character_speed*3500 * delta
+		velocity.z = direction.z * character_speed*3500 * delta
 	else:
-		velocity.x = move_toward(velocity.x, 0, character_speed)
-		velocity.z = move_toward(velocity.z, 0, character_speed)
+		velocity.x = move_toward(velocity.x, 0, character_speed*3500)
+		velocity.z = move_toward(velocity.z, 0, character_speed*3500)
 
 	move_and_slide()
 
 
-func start_slide() -> void:
+func start_slide(delta, direction) -> void:
 	is_sliding = true
-	player.scale.y = player.scale.y/slide_size
-	uncrouchray.scale.y=uncrouchray.scale.y*slide_size
-	var slide_direction = Vector3.FORWARD
-	slide_velocity = slide_direction * slide_speed
+	player.scale.y = default_size / slide_size
+	uncrouchray.scale.y = default_size / slide_size
+	#if direction 
 
 func end_slide() -> void:
 	is_sliding = false
-	player.scale.y = player.scale.y*slide_size
-	uncrouchray.scale.y=uncrouchray.scale.y/slide_size
+	player.scale.y = default_size
+	uncrouchray.scale.y = default_size
 	slide_velocity = Vector3.ZERO
+
+
+func _on_jump_pad_body_entered(body):
+	#velocity.y=0
+	if velocity.y < 0:
+		velocity.y+=velocity.y*multiplyJump*-1
+	else:
+		velocity.y+=velocity.y*multiplyJump
+	current_double_jumps = double_jumps
