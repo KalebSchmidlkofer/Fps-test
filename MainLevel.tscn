@@ -1,12 +1,13 @@
-[gd_scene load_steps=25 format=3 uid="uid://c5twcj0rfb0ky"]
+[gd_scene load_steps=26 format=3 uid="uid://c5twcj0rfb0ky"]
 
 [ext_resource type="Material" uid="uid://h0omavrnsek5" path="res://materials/floor.tres" id="1_iq7kj"]
 [ext_resource type="Material" uid="uid://dqy7k5m5efmw2" path="res://materials/obstacle.tres" id="2_4ects"]
-[ext_resource type="PackedScene" uid="uid://dehxs6jtu4lbw" path="res://Player/player.tscn" id="2_ts3o4"]
 [ext_resource type="Texture2D" uid="uid://cln6mmauswldv" path="res://textures/prototype/purple/texture_02.png" id="2_vupth"]
 [ext_resource type="Texture2D" uid="uid://cepdc3aje6iq4" path="res://textures/prototype/orange/texture_02.png" id="3_l5acw"]
 [ext_resource type="Texture2D" uid="uid://bkuv4n4r6rx2i" path="res://textures/prototype/dark/texture_01.png" id="4_qlmus"]
 [ext_resource type="Script" path="res://Triggers/JumpPad.gd" id="6_vf4h4"]
+[ext_resource type="PackedScene" uid="uid://bw5v5yedahvbf" path="res://Player/playerRigid.tscn" id="7_42732"]
+[ext_resource type="PackedScene" uid="uid://dehxs6jtu4lbw" path="res://Player/player.tscn" id="8_bbgo8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6gx3k"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -169,8 +170,11 @@ script = ExtResource("6_vf4h4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0791, 0)
 shape = SubResource("BoxShape3D_n1ft5")
 
-[node name="Player" parent="." instance=ExtResource("2_ts3o4")]
-multiplyJump = 2.0
+[node name="Player" parent="Shapes" instance=ExtResource("8_bbgo8")]
 
-[connection signal="body_entered" from="Shapes/Parkour/BouncePad/StaticBody3D/JumpPad" to="Player" method="_on_jump_pad_body_entered"]
-[connection signal="resetJumps" from="Shapes/Parkour/BouncePad/StaticBody3D/JumpPad" to="Player" method="_on_jump_pad_reset_jumps"]
+[node name="PlayerRigid" parent="." instance=ExtResource("7_42732")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.719484, 0)
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, -9.26269e-08, 9.43989e-08, -7.94911e-09, 0.670388, 0.742011, -1.32014e-07, -0.742011, 0.670388, -2.24122e-07, 7.71251, 3.31023)
