@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dehxs6jtu4lbw"]
 
-[ext_resource type="Script" path="res://Player/Player.gd" id="1_v1r05"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_v1r05"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_favby"]
 
@@ -31,7 +31,7 @@ shape = SubResource("CapsuleShape3D_1mhnq")
 [node name="Neck" type="Node3D" parent="."]
 
 [node name="1stPersonCamera" type="Camera3D" parent="Neck"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79453, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
 [node name="3rdPersonCamera" type="Camera3D" parent="Neck"]
 transform = Transform3D(1, 0, 0, 0, 0.957682, 0.287829, 0, -0.287829, 0.957682, 0, 3.8516, 5.42748)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://bkpsv2fe7jnm4"]
 
-[ext_resource type="Material" uid="uid://h0omavrnsek5" path="res://materials/floor.tres" id="1_bufpb"]
+[ext_resource type="Material" uid="uid://cn1gsy15bkaff" path="res://materials/floor.tres" id="1_bufpb"]
 [ext_resource type="PackedScene" uid="uid://dehxs6jtu4lbw" path="res://Player/player.tscn" id="2_6vb0b"]
 [ext_resource type="Shader" path="res://water.gdshader" id="2_l8wwo"]
 [ext_resource type="Texture2D" uid="uid://dmohejchjevdv" path="res://textures/Circle.png" id="2_xd68b"]

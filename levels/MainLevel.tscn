@@ -1,0 +1,196 @@
+[gd_scene load_steps=22 format=3 uid="uid://c5twcj0rfb0ky"]
+
+[ext_resource type="Material" uid="uid://cn1gsy15bkaff" path="res://materials/floor.tres" id="1_iq7kj"]
+[ext_resource type="PackedScene" uid="uid://btv0a42cgxt8g" path="res://levels/WE_test.tscn" id="1_w600i"]
+[ext_resource type="Material" uid="uid://dqy7k5m5efmw2" path="res://materials/obstacle.tres" id="2_4ects"]
+[ext_resource type="Texture2D" uid="uid://cln6mmauswldv" path="res://textures/prototype/purple/texture_02.png" id="2_vupth"]
+[ext_resource type="Texture2D" uid="uid://cepdc3aje6iq4" path="res://textures/prototype/orange/texture_02.png" id="3_l5acw"]
+[ext_resource type="Script" path="res://scripts/Triggers/JumpPad.gd" id="6_a0ffw"]
+[ext_resource type="PackedScene" uid="uid://dehxs6jtu4lbw" path="res://Player/player.tscn" id="8_bbgo8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vdw65"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jgcnp"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ukq67"]
+albedo_texture = ExtResource("2_vupth")
+
+[sub_resource type="BoxMesh" id="BoxMesh_2u6ob"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pwtxp"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ko07n"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_m3m20"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_bdrd5"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lagdj"]
+albedo_texture = ExtResource("3_l5acw")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_31anw"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vyb3s"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n1ft5"]
+size = Vector3(1.97174, 4.15919, 1.99084)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0uvg8"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jjsvf"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("1_w600i")]
+
+[node name="Shapes" type="Node" parent="."]
+
+[node name="Spawn" type="Node" parent="Shapes"]
+
+[node name="SpawnFloor" type="MeshInstance3D" parent="Shapes/Spawn"]
+transform = Transform3D(25, 0, 0, 0, 2, 0, 0, 0, 50, 0, -1, 0)
+material_override = ExtResource("1_iq7kj")
+mesh = SubResource("BoxMesh_vdw65")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Shapes/Spawn/SpawnFloor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shapes/Spawn/SpawnFloor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_jgcnp")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Shapes/Spawn/SpawnFloor"]
+
+[node name="SlideUnder" type="MeshInstance3D" parent="Shapes/Spawn"]
+transform = Transform3D(24.7104, -0.00514586, -0.00147269, -0.0016453, 6.59779, -0.591247, 0.0353982, 3.89871, 1.00057, 0.000903721, 5.22553, -15.6847)
+material_override = SubResource("StandardMaterial3D_ukq67")
+mesh = SubResource("BoxMesh_2u6ob")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Shapes/Spawn/SlideUnder"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shapes/Spawn/SlideUnder/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_pwtxp")
+
+[node name="Box" type="RigidBody3D" parent="Shapes/Spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.3762, 73.2885, -5.1012)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shapes/Spawn/Box"]
+shape = SubResource("BoxShape3D_ko07n")
+
+[node name="Parkour" type="Node" parent="Shapes"]
+
+[node name="Wall1" type="MeshInstance3D" parent="Shapes/Parkour"]
+transform = Transform3D(0.6075, 0, 0, 0, 10.2, 0, 0, 0, 21.85, -2, 7, -36)
+material_override = ExtResource("2_4ects")
+mesh = SubResource("BoxMesh_m3m20")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Shapes/Parkour/Wall1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shapes/Parkour/Wall1/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_bdrd5")
+
+[node name="Wall2" type="MeshInstance3D" parent="Shapes/Parkour"]
+transform = Transform3D(0.608, 0, 0, 0, 10.2, 0, 0, 0, 21.85, 8, 7, -49)
+material_override = ExtResource("2_4ects")
+mesh = SubResource("BoxMesh_m3m20")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Shapes/Parkour/Wall2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shapes/Parkour/Wall2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_bdrd5")
+
+[node name="Wall3" type="MeshInstance3D" parent="Shapes/Parkour"]
+transform = Transform3D(0.608, 0, 0, 0, 10.2, 0, 0, 0, 21.85, -2.01466, 7, -67.0031)
+material_override = ExtResource("2_4ects")
+mesh = SubResource("BoxMesh_m3m20")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Shapes/Parkour/Wall3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shapes/Parkour/Wall3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_bdrd5")
+
+[node name="Wall4" type="MeshInstance3D" parent="Shapes/Parkour"]
+transform = Transform3D(0.608, 0, 0, 0, 10.2, 0, 0, 0, 21.85, 8, 7, -81)
+material_override = ExtResource("2_4ects")
+mesh = SubResource("BoxMesh_m3m20")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Shapes/Parkour/Wall4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shapes/Parkour/Wall4/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_bdrd5")
+
+[node name="BouncePad" type="MeshInstance3D" parent="Shapes/Parkour"]
+transform = Transform3D(10.647, 0, 0, 0, 0.13, 0, 0, 0, 10.5494, 0, -40.2669, -128.079)
+material_override = SubResource("StandardMaterial3D_lagdj")
+mesh = SubResource("PlaneMesh_31anw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Shapes/Parkour/BouncePad"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shapes/Parkour/BouncePad/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_vyb3s")
+
+[node name="JumpPad" type="Area3D" parent="Shapes/Parkour/BouncePad/StaticBody3D"]
+script = ExtResource("6_a0ffw")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Shapes/Parkour/BouncePad/StaticBody3D/JumpPad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0791, 0)
+shape = SubResource("BoxShape3D_n1ft5")
+
+[node name="BouncePad2" type="MeshInstance3D" parent="Shapes/Parkour"]
+transform = Transform3D(10.647, 0, 0, 0, 0.13, 0, 0, 0, 10.5494, -49.8213, -40.2669, 0.0566483)
+material_override = SubResource("StandardMaterial3D_lagdj")
+mesh = SubResource("PlaneMesh_31anw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Shapes/Parkour/BouncePad2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shapes/Parkour/BouncePad2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_vyb3s")
+
+[node name="JumpPad" type="Area3D" parent="Shapes/Parkour/BouncePad2/StaticBody3D"]
+script = ExtResource("6_a0ffw")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Shapes/Parkour/BouncePad2/StaticBody3D/JumpPad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0791, 0)
+shape = SubResource("BoxShape3D_n1ft5")
+
+[node name="Slide" type="MeshInstance3D" parent="Shapes/Parkour"]
+transform = Transform3D(32.5245, -0.67119, 0, 29.449, 0.741285, 0, 0, 0, 13.7417, -27.673, -15.5211, 0)
+material_override = ExtResource("1_iq7kj")
+mesh = SubResource("BoxMesh_0uvg8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Shapes/Parkour/Slide"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shapes/Parkour/Slide/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_jjsvf")
+
+[node name="Slide2" type="MeshInstance3D" parent="Shapes/Parkour"]
+transform = Transform3D(-1.38404e-06, 3.02595e-08, -19.0623, 30.3733, 0.721651, 0, 31.6631, -0.692257, -8.33242e-07, 1.4552, -15.5211, -101.267)
+material_override = ExtResource("1_iq7kj")
+mesh = SubResource("BoxMesh_0uvg8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Shapes/Parkour/Slide2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shapes/Parkour/Slide2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_jjsvf")
+
+[node name="Player" parent="." instance=ExtResource("8_bbgo8")]
+floor_stop_on_slope = false
+floor_constant_speed = false
+floor_block_on_wall = false
+floor_max_angle = 0.698132
+character_speed = 0.5
+multiply_run = 1.4
+multiplyJump = 1.8
+slide_resistance = 1.0
+slide_size = 0.8
+
+[connection signal="body_entered" from="Shapes/Parkour/BouncePad/StaticBody3D/JumpPad" to="Player" method="_on_jump_pad_body_entered"]
+[connection signal="body_entered" from="Shapes/Parkour/BouncePad2/StaticBody3D/JumpPad" to="Player" method="_on_jump_pad_body_entered"]
